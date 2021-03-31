@@ -7,16 +7,14 @@ FFLAG2 =
 DEFS =
 PP =
 
-MPI = yes
-#MPI = cray
-OPENMP = yes
+MPI = no
+OPENMP = no
 
-MPIFLAGS = 
-
-FORTRAN = mpif90
+#FORTRAN = mpif90
 #FORTRAN = mpifort
 #FORTRAN = ftn
 #FORTRAN = mpiifort
+FORTRAN = gfortran
 
 TARGET = gsnap
 #TARGET = isnap
