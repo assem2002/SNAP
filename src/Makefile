@@ -14,7 +14,7 @@ OPENMP = no
 #FORTRAN = mpifort
 #FORTRAN = ftn
 #FORTRAN = mpiifort
-FORTRAN = gfortran
+FORTRAN = lfortran
 
 TARGET = gsnap
 #TARGET = isnap
@@ -39,9 +39,7 @@ ifeq ($(MPI),yes)
   DEFS := $(DEFS) MPI
 else
   ifeq ($(TARGET),gsnap)
-    FORTRAN = gfortran
-  else ifeq ($(TARGET),xsnap)
-    FORTRAN = ifx
+    FORTRAN = lfortran
   else
     FORTRAN = ifort
   endif
@@ -64,7 +62,7 @@ PPFLAGS = $(foreach def,$(DEFS),-D$(def))
 
 ifeq ($(TARGET),gsnap)
 #  FFLAGS = -Ofast -funroll-loops -march=native $(OMPFLAG)
-  FFLAGS = -O3 $(OMPFLAG)
+  FFLAGS = $(OMPFLAG)
   FFLAG2 =
   PP = cpp
   ifeq ($(OPT),no)
@@ -172,11 +170,9 @@ translv.o :	global.o plib.o geom.o sn.o data.o control.o utils.o \
 #
 %.o:	%.0.F90
 	$(PP) -P $(PPFLAGS) $< >$*.f90
-	lfortran fmt -i $*.f90
 	$(FORTRAN) $(FFLAGS) -c $*.f90
 
 %.o:	%.f90
-	lfortran fmt -i $<
 	$(FORTRAN) $(FFLAGS) -c $<
 
 #
