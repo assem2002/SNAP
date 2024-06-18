@@ -234,7 +234,9 @@ MODULE utils_module
 
     CALL pend
 
-    CALL EXIT ( 0 )
+    ! CALL EXIT ( 0 )
+    ! >>>>> Workaround <<<<<
+    error stop 
 
     !STOP
 !_______________________________________________________________________
