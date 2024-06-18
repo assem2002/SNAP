@@ -98,6 +98,8 @@ PROGRAM snap_main
     pcomm_set, pinit_omp
 
   USE control_module, ONLY: otrdone, swp_typ
+  
+  USE translv_module, ONLY: translv
 
   IMPLICIT NONE
 !_______________________________________________________________________

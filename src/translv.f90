@@ -1,3 +1,11 @@
+MODULE translv_module
+
+  IMPLICIT NONE
+
+
+  PUBLIC :: translv
+  
+  CONTAINS 
 SUBROUTINE translv ( ndpwds )
 
 !-----------------------------------------------------------------------
@@ -394,3 +402,4 @@ SUBROUTINE translv ( ndpwds )
 !_______________________________________________________________________
 
 END SUBROUTINE translv
+END MODULE translv_module
