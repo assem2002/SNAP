@@ -116,16 +116,16 @@ endif
 
 .SUFFIXES:	.F90 .f90 .o
 
-OBJS = global.o snap_main.o utils.o version.o plib.o geom.o sn.o \
+OBJS = global.o utils.o version.o plib.o geom.o sn.o \
        data.o control.o input.o setup.o dealloc.o translv.o solvar.o \
        outer.o expxs.o inner.o sweep.o octsweep.o dim1_sweep.o \
-       dim3_sweep.o output.o time.o mms.o analyze.o thrd_comm.o mkba_sweep.o
+       dim3_sweep.o output.o time.o mms.o analyze.o thrd_comm.o mkba_sweep.o snap_main.o
 
-SRCS = global.f90 snap_main.f90 utils.f90 version.f90 plib.F90 geom.f90 \
+SRCS = global.f90 utils.f90 version.f90 plib.F90 geom.f90 \
        sn.f90 data.f90 control.f90 input.f90 setup.f90 dealloc.f90 \
        translv.f90 solvar.f90 outer.f90 expxs.f90 inner.f90 sweep.f90 \
        octsweep.f90 dim1_sweep.f90 dim3_sweep.f90 output.f90 \
-       time.F90 mms.f90 analyze.f90 thrd_comm.f90 mkba_sweep.f90
+       time.F90 mms.f90 analyze.f90 thrd_comm.f90 mkba_sweep.f90 snap_main.f90
 
 $(TARGET) :	$(OBJS)
 		$(FORTRAN) $(FFLAGS) $(FFLAG2) -o $@ $(OBJS)
