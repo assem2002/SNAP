@@ -38,6 +38,9 @@ MODULE mkba_sweep_module
   END TYPE diag_type
 
   TYPE(diag_type), ALLOCATABLE, DIMENSION(:) :: diag
+
+  ! WORKAROUND: Variable used below for converting `WHERE` clause to `DO` loop
+  INTEGER :: arr_index
   
   CONTAINS
 
@@ -327,24 +330,40 @@ MODULE mkba_sweep_module
             sum_hv = nedg * nang
 
             fixup_loop: DO
-
-              fxhv(:,1) = two*pc - psii(:,j,k)
-              WHERE( fxhv(:,1) < zero ) hv(:,1) = zero
+            
+            fxhv(:,1) = two*pc - psii(:,j,k)
+            ! WORKAROUND: `where` clause changed to `do` loop
+            ! WHERE( fxhv(:,1) < zero ) hv(:,1) = zero
+              do arr_index = 1, size(fxhv, 1)
+                if (fxhv(arr_index, 1) < zero) hv(arr_index, 1) = zero
+              end do 
               sum_hv_n = SUM( hv(:,1) )
 
               fxhv(:,2) = two*pc - psij(:,ic,k)
-              WHERE( fxhv(:,2) < zero ) hv(:,2) = zero
+              ! WORKAROUND: `where` clause changed to `do` loop
+              ! WHERE( fxhv(:,2) < zero ) hv(:,2) = zero
+              do arr_index = 1, size(fxhv, 1)
+                if (fxhv(arr_index, 2) < zero) hv(arr_index, 2) = zero
+              end do 
               sum_hv_n = sum_hv_n + SUM( hv(:,2) )
 
               IF ( ndimen == 3 ) THEN
                 fxhv(:,3) = two*pc - psik(:,ic,j)
-                WHERE( fxhv(:,3) < zero ) hv(:,3) = zero
+                ! WORKAROUND: `where` clause changed to `do` loop
+                ! WHERE( fxhv(:,3) < zero ) hv(:,3) = zero
+                do arr_index = 1, size(fxhv, 1)
+                  if (fxhv(arr_index, 3) < zero) hv(arr_index, 3) = zero
+                end do                 
                 sum_hv_n = sum_hv_n + SUM( hv(:,3) )
               END IF
 
               IF ( vdelt /= zero ) THEN
                 fxhv(:,4) = two*pc - ptr_in(:,i,j,k,oct)
-                WHERE( fxhv(:,4) < zero ) hv(:,4) = zero
+                ! WORKAROUND: `where` clause changed to `do` loop
+                ! WHERE( fxhv(:,4) < zero ) hv(:,4) = zero
+                do arr_index = 1, size(fxhv, 1)
+                  if (fxhv(arr_index, 4) < zero) hv(arr_index, 4) = zero
+                end do 
                 sum_hv_n = sum_hv_n + SUM( hv(:,4) )
               END IF
 !_______________________________________________________________________

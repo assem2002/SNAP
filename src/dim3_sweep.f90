@@ -26,6 +26,9 @@ MODULE dim3_sweep_module
 
   PUBLIC :: dim3_sweep
 
+  integer :: arr_index
+  integer :: arr_index2
+
 
   CONTAINS
 
@@ -295,7 +298,15 @@ MODULE dim3_sweep_module
           IF ( ndimen == 3 ) fxhv(:,3) = two*pc - psik(:,ic,j)
           IF ( vdelt /= zero ) fxhv(:,4) = two*pc - ptr_in(:,i,j,k)
 
-          WHERE ( fxhv < zero ) hv = zero
+          ! WORKAROUND: `where` clause changed to `do` loop
+          ! WHERE ( fxhv < zero ) hv = zero
+          do arr_index = 1, NANG
+            do arr_index2 = 1, 4
+                if (fxhv(arr_index, arr_index2) < zero) then
+                    hv(arr_index, arr_index2) = zero
+                end if
+            end do
+        end do
 !_______________________________________________________________________
 !
 !         Exit loop when all angles are fixed up, i.e., no change in hv
