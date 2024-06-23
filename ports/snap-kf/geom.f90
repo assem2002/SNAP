@@ -32,7 +32,7 @@ MODULE geom_module
 ! lz       - total length of z domain
 !_______________________________________________________________________
 
-  INTEGER(i_knd) :: ndimen=1, nx=4, ny=1, nz=1
+  INTEGER(i_knd) :: ndimen=1, nx=4, ny=1, nz=1, arr_index
 
   REAL(r_knd) :: lx=one, ly=one, lz=one
 !_______________________________________________________________________
@@ -143,7 +143,10 @@ MODULE geom_module
       ALLOCATE( diag(ndiag), indx(ndiag), STAT=ierr )
       IF ( ierr /= 0 ) RETURN
 
-      diag%len = 0
+      ! diag%len = 0
+      do arr_index = 1, ndiag
+        diag(arr_index)%len = 0
+      end do
       indx = 0
 !_______________________________________________________________________
 !
