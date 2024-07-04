@@ -83,6 +83,8 @@ PROGRAM snap_main
 
   USE kokkos_f_interface, ONLY: kokkos_initialize, kokkos_finalize
 
+  USE translv_module, ONLY: translv
+
   IMPLICIT NONE
 !_______________________________________________________________________
 !

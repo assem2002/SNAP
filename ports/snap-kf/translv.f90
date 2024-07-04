@@ -1,3 +1,12 @@
+MODULE translv_module
+
+  IMPLICIT NONE
+
+
+  PUBLIC :: translv
+  
+  CONTAINS 
+
 SUBROUTINE translv
 
 !-----------------------------------------------------------------------
@@ -390,3 +399,5 @@ SUBROUTINE translv
 !_______________________________________________________________________
 
 END SUBROUTINE translv
+
+END MODULE translv_module
