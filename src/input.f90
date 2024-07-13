@@ -69,36 +69,6 @@ MODULE input_module
     CALL wtime ( t1 )
 
     ierr = 0
-    ! >>>>> Workaround <<<<<<
-    ! This workaround is specific to read the datain sample file mentioned in SNAP repo.
-    IF ( iproc == root ) then
-      npey=     2
-      npez=     2
-      ichunk=     4
-      nthreads=     2
-      ndimen=  3
-      nx=     4
-      ny=     4
-      nz=     4
-      lx=  1.0000E+00
-      ly=  1.0000E+00
-      lz=  1.0000E+00
-      nmom=   2
-      nang=    8
-      ng=    2
-      mat_opt=  0
-      src_opt=  0
-      scatp=  0
-      epsi=  1.0000E-04
-      iitm=   5
-      oitm=  100
-      timedep=  0
-      tf=  0.0000E+00
-      nsteps=     1
-      it_det=  0
-      fluxp=  0
-      fixup=  0
-    END IF
     CALL bcast ( ierr, comm_snap, root )
     IF ( ierr /= 0 ) THEN
       error = '***ERROR: READ_INPUT: Problem reading input file'
