@@ -234,9 +234,9 @@ MODULE utils_module
 
     CALL pend
 
+    ! Workaround: Use STOP instead of EXIT
     ! CALL EXIT ( 0 )
-    ! >>>>> Workaround <<<<<
-    error stop 
+    STOP
 
     !STOP
 !_______________________________________________________________________
