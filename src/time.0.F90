@@ -86,12 +86,14 @@ MODULE time_module
     CHARACTER(LEN=1) :: star='*'
 
     INTEGER(i_knd) :: i
+    character(1) :: stars_array80(80)
+    stars_array80 = '*'
 !_______________________________________________________________________
 
     tinrmisc = tinners - ( tinrsrc + tsweeps )
     tslvmisc = tslv - ( tparam + totrsrc + tinners )
 
-    WRITE( ounit, 401 ) ( star, i = 1, 80 )
+    WRITE( ounit, 401 ) stars_array80
     WRITE( ounit, 402 )
     WRITE( ounit, 403 ) tparset
     WRITE( ounit, 404 ) tinp
