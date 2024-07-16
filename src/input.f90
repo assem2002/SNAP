@@ -69,6 +69,39 @@ MODULE input_module
     CALL wtime ( t1 )
 
     ierr = 0
+    if(iproc ==  root) then 
+      npey=1 ! use 1 as we don't use mpi.
+      npez=1 ! use 1 as we don't use mpi.
+      ichunk=2
+      nthreads=2
+      nnested=1
+      ndimen=3
+      nx=6
+      lx=0.6
+      ny=6
+      ly=0.6
+      nz=6
+      lz=0.6
+      nmom=1
+      nang=10
+      ng=4
+      epsi=1.0E-4
+      iitm=5
+      oitm=30
+      timedep=0
+      tf=1.0
+      nsteps=1
+      mat_opt=0
+      src_opt=0
+      scatp=0
+      it_det=0
+      fluxp=0
+      fixup=1
+      soloutp=1
+      kplane=0
+      popout=0
+      swp_typ=0
+    end if
     CALL bcast ( ierr, comm_snap, root )
     IF ( ierr /= 0 ) THEN
       error = '***ERROR: READ_INPUT: Problem reading input file'
