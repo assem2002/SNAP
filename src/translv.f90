@@ -159,7 +159,7 @@ SUBROUTINE translv ( ndpwds )
       ptr_tmp => ptr_out
       ptr_out => ptr_in
       ptr_in  => ptr_tmp
-      NULLIFY( ptr_tmp )
+      ! NULLIFY( ptr_tmp )
     END IF
 !_______________________________________________________________________
 !
