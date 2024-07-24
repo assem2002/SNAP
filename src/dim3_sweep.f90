@@ -298,15 +298,7 @@ MODULE dim3_sweep_module
           IF ( ndimen == 3 ) fxhv(:,3) = two*pc - psik(:,ic,j)
           IF ( vdelt /= zero ) fxhv(:,4) = two*pc - ptr_in(:,i,j,k)
 
-          ! WORKAROUND: `where` clause changed to `do` loop
-          ! WHERE ( fxhv < zero ) hv = zero
-          do arr_index = 1, NANG
-            do arr_index2 = 1, 4
-                if (fxhv(arr_index, arr_index2) < zero) then
-                    hv(arr_index, arr_index2) = zero
-                end if
-            end do
-        end do
+          WHERE ( fxhv < zero ) hv = zero
 !_______________________________________________________________________
 !
 !         Exit loop when all angles are fixed up, i.e., no change in hv

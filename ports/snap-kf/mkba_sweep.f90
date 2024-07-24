@@ -326,41 +326,22 @@ MODULE mkba_sweep_module
             fixup_loop: DO
 
               fxhv(:,1) = two*pc - psii(:,j,k)
-              ! WORKAROUND: `where` clause changed to `do` loop
-              ! WHERE( fxhv(:,1) < zero ) hv(:,1) = zero
-              integer :: arr_index
-              do arr_index = 1, size(fxhv, 1)
-                if (fxhv(arr_index, 1) < zero) hv(arr_index, 1) = zero
-              end do            
+              WHERE( fxhv(:,1) < zero ) hv(:,1) = zero           
               sum_hv_n = SUM( hv(:,1) )
 
               fxhv(:,2) = two*pc - psij(:,ic,k)
-              ! WORKAROUND: `where` clause changed to `do` loop
-              ! WHERE( fxhv(:,2) < zero ) hv(:,2) = zero
-              do arr_index = 1, size(fxhv, 1)
-                if (fxhv(arr_index, 2) < zero) hv(arr_index, 2) = zero
-              end do
+              WHERE( fxhv(:,2) < zero ) hv(:,2) = zero
               sum_hv_n = sum_hv_n + SUM( hv(:,2) )
 
               IF ( ndimen == 3 ) THEN
                 fxhv(:,3) = two*pc - psik(:,ic,j)
-                ! WORKAROUND: `where` clause changed to `do` loop
-                ! WHERE( fxhv(:,3) < zero ) hv(:,3) = zero
-                integer :: arr_index
-                do arr_index = 1, size(fxhv, 1)
-                  if (fxhv(arr_index, 3) < zero) hv(arr_index, 3) = zero
-                end do
+                WHERE( fxhv(:,3) < zero ) hv(:,3) = zero
                 sum_hv_n = sum_hv_n + SUM( hv(:,3) )
               END IF
 
               IF ( vdelt /= zero ) THEN
                 fxhv(:,4) = two*pc - ptr_in(:,i,j,k,oct)
-                ! WORKAROUND: `where` clause changed to `do` loop
-                ! WHERE( fxhv(:,4) < zero ) hv(:,4) = zero
-                integer :: arr_index
-                do arr_index = 1, size(fxhv, 1)
-                  if (fxhv(arr_index, 4) < zero) hv(arr_index, 4) = zero
-                end do
+                WHERE( fxhv(:,4) < zero ) hv(:,4) = zero
                 sum_hv_n = sum_hv_n + SUM( hv(:,4) )
               END IF
 !_______________________________________________________________________
