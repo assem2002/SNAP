@@ -751,11 +751,9 @@ MODULE setup_module
     CHARACTER(LEN=1) :: star='*'
 
     INTEGER(i_knd) :: i, j
-    character(1) :: stars_array80(80)
-    stars_array80 = '*'
 !_______________________________________________________________________
 
-    WRITE( ounit, 131 ) stars_array80
+    WRITE( ounit, 131 ) ( star, i = 1, 80 )
 
     WRITE( ounit, 132 )
     WRITE( ounit, 133 ) ndimen, nx, ny_gl, nz_gl, lx, ly, lz, dx, dy, dz
@@ -826,7 +824,7 @@ MODULE setup_module
     END IF
     WRITE ( ounit, 187 ) pce
 
-    WRITE( ounit, 159 ) stars_array80
+    WRITE( ounit, 159 ) ( star, i = 1, 80 )
 !_______________________________________________________________________
 
     131 FORMAT( 10X, 'keyword Calculation Run-time Parameters Echo', /,&
